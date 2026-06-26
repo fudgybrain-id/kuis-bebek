@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Special Quiz untuk Bebek! 🦆❤️</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #FAF9F6;
+      color: #2D3748;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .quiz-container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+    }
+    h2 { color: #2D3748; margin-bottom: 20px; font-size: 22px; }
+    .btn-choice {
+      display: block;
+      width: 100%;
+      background: #FAF9F6;
+      color: #2D3748;
+      border: 2px solid #E2E8F0;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+    .btn-choice:hover {
+      background: #2D3748;
+      color: #ffffff;
+      border-color: #2D3748;
+    }
+    .result-message {
+      font-weight: bold;
+      margin-top: 15px;
+      min-height: 24px;
+    }
+    .hidden { display: none; }
+    .reward-box {
+      background: #FAF9F6;
+      padding: 20px;
+      border-radius: 8px;
+      border: 2px dashed #2D3748;
+      margin-top: 20px;
+    }
+    .btn-claim {
+      background: #2D3748;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <!-- QUESTION 1 -->
+  <div id="q1">
+    <h2>Pertanyaan 1: Kapan atau di mana pertama kali kita beneran nge-date / jalan berdua? 🤔</h2>
+    <button class="btn-choice" onclick="checkAnswer(1, true)">[Tulis Tempat/Acara yang Benar di Sini]</button>
+    <button class="btn-choice" onclick="checkAnswer(1, false)">Pas papasan di koridor kampus doang</button>
+    <button class="btn-choice" onclick="checkAnswer(1, false)">Lupa yaaa? Hayo loh!</button>
+    <p id="feedback1" class="result-message"></p>
+  </div>
+
+  <!-- QUESTION 2 -->
+  <div id="q2" class="hidden">
+    <h2>Pertanyaan 2: Apa menu camilan/makanan yang paling sering aku bikin di rumah dan paling sukses bikin dapur wangi? 🥖🍰</h2>
+    <button class="btn-choice" onclick="checkAnswer(2, false)">Martabak telur gagal</button>
+    <button class="btn-choice" onclick="checkAnswer(2, true)">Fudgy Brownies atau Sourdough! 👩‍🍳</button>
+    <button class="btn-choice" onclick="checkAnswer(2, false)">Mie instan kuah pake cabai rawit</button>
+    <p id="feedback2" class="result-message"></p>
+  </div>
+
+  <!-- QUESTION 3 -->
+  <div id="q3" class="hidden">
+    <h2>Pertanyaan 3: Udah mau jalan 2 tahun nih, seberapa sayang Bebek sama aku? 🤨</h2>
+    <button class="btn-choice" onclick="checkAnswer(3, false)">Setinggi puncak gedung rektorat</button>
+    <button class="btn-choice" onclick="checkAnswer(3, false)">Seluas area kampus kita dulu</button>
+    <button class="btn-choice" onclick="checkAnswer(3, true)">Nggak terhitung, pokoknya sampai ke luar angkasa! 🚀</button>
+    <p id="feedback3" class="result-message"></p>
+  </div>
+
+  <!-- FINAL REWARD -->
+  <div id="reward" class="hidden">
+    <h2>🎉 SELAMAT! BEBEK LULUS KUIS! 🎉</h2>
+    <p>Makasih ya udah selalu jadi partner, mantan senior, sekaligus sahabat terbaikku selama hampir 2 tahun ini. Menghabiskan waktu bareng kamu itu selalu jadi bagian favorit aku. 🦆❤️</p>
+    <div class="reward-box">
+      <h3>🎟️ KUPON NGE-DATE GRATIS 🎟️</h3>
+      <p>Kupon ini berlaku untuk 1x makan malam gratis + es krim yang ditraktir sama aku!</p>
+      <button class="btn-claim" onclick="claimReward()">Klaim Kupon via WhatsApp</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function checkAnswer(questionNum, isCorrect) {
+    const feedback = document.getElementById('feedback' + questionNum);
+    if (isCorrect) {
+      feedback.style.color = "green";
+      feedback.innerText = "Yey, bener banget! Lanjut...";
+      
+      setTimeout(() => {
+        document.getElementById('q' + questionNum).classList.add('hidden');
+        if (questionNum < 3) {
+          document.getElementById('q' + (questionNum + 1)).classList.remove('hidden');
+        } else {
+          document.getElementById('reward').classList.remove('hidden');
+        }
+      }, 1500);
+    } else {
+      feedback.style.color = "red";
+      feedback.innerText = "Salah mpreet! Pikir lagi 😜";
+    }
+  }
+
+  function claimReward() {
+    // Ganti nomor di bawah ini dengan nomor WhatsApp kamu (awali dengan 62)
+    const nomorWA = "628xxxxxxxxxx"; 
+    const teks = encodeURIComponent("Halo Sayang! Bebek udah berhasil jawab semua kuisnya dengan bener dong. Mau klaim kupon nge-date gratisnya sekarang! 🎟️🦆❤️");
+    window.open("https://wa.me/" + nomorWA + "?text=" + teks, "_blank");
+  }
+</script>
+
+</body>
+</html>
